@@ -110,6 +110,48 @@ struct node * addBeforePos(struct node*head, int data, int pos)
     return head;
 }
 
+struct node* deleteAtFirst(struct node* head)
+{
+    struct node *temp = head;
+    head = head -> next;
+    head -> prev = NULL;
+    free(temp);
+    temp = NULL;
+    return head;
+}
+
+struct node* deleteAtLast(struct node* head)
+{
+    struct node *temp = head;
+    while (temp -> next != NULL)
+    {
+        temp = temp -> next;
+    }
+    struct node *temp2 = temp -> prev;
+    temp2 -> next = NULL;
+    free(temp);
+    temp = NULL;
+
+    return head;
+}
+
+struct node* deleteInBetween(struct node* head, int pos)
+{
+    struct node *temp = head;
+    while (pos > 1)
+    {
+        temp = temp -> next;
+        pos--;
+    }
+    struct node *temp2 = temp -> next;
+    struct node *temp1 = temp -> prev;
+    temp1 -> next = temp2;
+    temp2 -> prev = temp1;
+    free(temp);
+    temp = NULL;
+    return head;
+}
+
 int countNoOfNodes(struct node* head, int count)
 {
     if (head == NULL)
@@ -173,6 +215,14 @@ int main()
     int beforePosition = 5;
     head = addBeforePos(head, 52, beforePosition);
 
+    printf("Before deletion  ");
+    displayList(head);
+
+    //head = deleteAtFirst(head);
+    //head = deleteAtLast(head);
+    int position =2;
+    head = deleteInBetween(head,position);
+    printf("After deletion ");
     displayList(head);
     return 0;
 }
