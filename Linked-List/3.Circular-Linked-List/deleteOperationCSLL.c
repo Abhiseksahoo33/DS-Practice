@@ -82,6 +82,31 @@ struct node* deleteFirstNode(struct node* tail)
     
 }
 
+struct node* deleteLastNode(struct node* tail)
+{
+    if (tail == NULL)
+    {
+        return NULL;
+    }
+    if (tail -> next == tail)
+    {
+        free(tail);
+        tail == NULL;
+        return NULL;
+    }
+    struct node* temp = tail -> next;
+    
+    while (temp -> next != tail)
+    {
+        temp = temp->next;
+    }
+    temp->next = tail->next;
+    free(tail);
+    tail = temp;
+    return tail;
+    
+}
+
 void print_nodes(struct node* tail)
 {
     struct node* p = tail -> next;
@@ -104,10 +129,13 @@ int main()
     tail = addAtBeg(tail,27);
     int position =2;
     tail = addAtPos(tail,99,position);
-    printf("Nodes before deletion: ");
+    printf("Nodes before deletion: "); //Nodes before deletion: 27 ->46 ->99 ->36 ->86
     print_nodes(tail);
-    printf("\nNodes after deletion: ");
+    printf("\nNodes after deletion: ");//Nodes after deletion: 46 ->99 ->36 ->86 ->
     tail = deleteFirstNode(tail);
+    print_nodes(tail);
+    printf("\nDeleting Last Node: "); //Deleting Last Node: 46 ->99 ->36 ->
+    tail = deleteLastNode(tail);
     print_nodes(tail);
     return 0;
 }
