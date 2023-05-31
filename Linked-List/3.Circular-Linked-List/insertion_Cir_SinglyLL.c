@@ -86,6 +86,24 @@ void countNumberOfnodes(struct node* tail)
     printf("\nNumber of Nodes:%d ",count);
 }
 
+void searchData(struct node* tail)
+{
+    int num, index= 0;
+    printf("Enter the element you want to search: ");
+    scanf("%d",&num);
+    struct node* temp = tail->next;
+    do
+    {
+        if (temp->data == num)
+        {
+            printf("Element %d is in %d index",num,index);
+        }
+        temp = temp->next;
+        index++;
+    } while (temp != tail->next);
+    
+}
+
 int main()
 {
     int data = 36;
@@ -98,5 +116,6 @@ int main()
     tail = addAtPos(tail,99,position);
     print_nodes(tail);
     countNumberOfnodes(tail);
+    searchData(tail);
     return 0;
 }
