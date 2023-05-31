@@ -73,6 +73,18 @@ void print_nodes(struct node* tail)
     
 }
 
+void countNumberOfnodes(struct node* tail)
+{
+    struct node* temp = tail->next;
+    int count=0;
+    while (temp != tail)
+    {
+        temp = temp->next;
+        count++;
+    }
+    count++;
+    printf("\nNumber of Nodes:%d ",count);
+}
 
 int main()
 {
@@ -85,5 +97,6 @@ int main()
     int position =2;
     tail = addAtPos(tail,99,position);
     print_nodes(tail);
+    countNumberOfnodes(tail);
     return 0;
 }
