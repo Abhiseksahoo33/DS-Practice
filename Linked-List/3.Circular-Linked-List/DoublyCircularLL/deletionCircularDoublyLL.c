@@ -93,6 +93,23 @@ struct node *deleteFirstNode(struct node* tail)
     return tail;
 }
 
+struct node *deleteLastNode(struct node* tail)
+{
+    struct node* temp = tail->next;
+    if (temp == tail)
+    {
+        free(tail);
+        tail = NULL;
+    }
+    temp = tail->prev;
+    temp->next = tail->next;
+    temp->next->prev = temp;
+    free(tail);
+    tail = temp;
+    
+    return tail;
+}
+
 void print_nodes(struct node* tail)
 {
     if (tail == NULL)
@@ -121,6 +138,9 @@ int main()
     print_nodes(tail);
     printf("After deleting first Node: ");
     tail = deleteFirstNode(tail);
+    print_nodes(tail);
+    printf("After deleting Last Node: ");
+    tail = deleteLastNode(tail);
     print_nodes(tail);
     return 0;
 }
